@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now - GlobalTretekker</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3eb8ff;
+            --primary-color-dark: #3eb8ff;
+            --text-dark: #333333;
+            --text-light: #767268;
+            --white: #ffffff;
+            --max-width: 1200px;
+            --header-font: "Bebas Neue", sans-serif;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        img {
+            display: flex;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+
+        nav {
+            position: fixed;
+            isolation: isolate;
+            width: 100%;
+            z-index: 9;
+            display: flex;
+        }
+
+        .nav__header {
+            padding: 1rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--primary-color);
+        }
+
+        .nav__logo a {
+            font-size: 1.75rem;
+            font-weight: 400;
+            font-family: var(--header-font);
+            color: var(--white);
+        }
+
+        .nav__menu__btn {
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        .nav__links {
+            position: absolute;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+            background-color: var(--primary-color);
+            transition: 0.5s;
+            z-index: -1;
+            transform: translateY(-100%);
+        }
+
+        .nav__links.open {
+            transform: translateY(0);
+        }
+
+        .nav__links a {
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .nav__links a:hover {
+            color: var(--text-dark);
+        }
+
+        .nav__btns {
+            display: none;
+        }
+
+        .book-now {
+            padding: 8rem 1rem 4rem;
+            background-color: #f8f9fa;
+        }
+
+        .book-now__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .book-now__header h2 {
+            font-size: 3rem;
+            font-family: var(--header-font);
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .book-now__header h2 span {
+            color: var(--primary-color);
+        }
+
+        .book-now__header p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .book-now__content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        .book-now__package {
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-now__package:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 10px;
+        }
+
+        .slider-buttons button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider-buttons button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .book-now__package h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding: 1rem;
+        }
+
+        .book-now__package p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+
+        .book-now__price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+
+        .book-now__price span {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .book-now__order {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-now__order:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-now__order h3 {
+            margin-bottom: 1rem;
+        }
+
+        .order-catalog {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quantity button {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity button:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        .quantity-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .book-now__btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-now__btn:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        .reviews {
+            margin-top: 3rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .reviews h3 {
+            margin-bottom: 1rem;
+        }
+
+        .review {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .review:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-rating {
+            color: #ffd700;
+            font-size: 1.25rem;
+        }
+
+        .review-author {
+            font-weight: 600;
+        }
+
+        .review-text {
+            color: var(--text-light);
+        }
+
+        .footer {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .footer__content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer__logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer__logo a {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer__logo span {
+            color: #00aeff;
+        }
+
+        .footer__links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer__links a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .footer__links a:hover {
+            color: #00a2ff;
+            transform: translateX(5px);
+        }
+
+        .footer__social {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer__social a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer__social a:hover {
+            background-color: #02afff;
+            transform: translateY(-3px);
+        }
+
+        .footer__copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                padding-block: 2rem 0;
+                padding-inline: 1rem;
+                max-width: var(--max-width);
+                margin-inline: auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 2rem;
+            }
+
+            .nav__header {
+                flex: 1;
+                padding: 0;
+                background-color: transparent;
+            }
+
+            .nav__logo a {
+                color: var(--text-dark);
+            }
+
+            .nav__logo a span {
+                color: var(--primary-color);
+            }
+
+            .nav__menu__btn {
+                display: none;
+            }
+
+            .nav__links {
+                position: static;
+                padding: 0;
+                flex-direction: row;
+                background-color: transparent;
+                transform: none;
+            }
+
+            .nav__links a {
+                padding-block: 5px;
+                color: var(--text-dark);
+                border-bottom: 4px solid transparent;
+            }
+
+            .nav__links a:hover {
+                border-color: var(--primary-color);
+            }
+
+            .nav__btns {
+                display: flex;
+                flex: 1;
+            }
+
+            .nav__btns .btn {
+                padding: 0.75rem 1.5rem;
+                outline: none;
+                border: none;
+                font-size: 1rem;
+                white-space: nowrap;
+                border-radius: 10px;
+                transition: 0.3s;
+                cursor: pointer;
+            }
+
+            .sign__up {
+                color: var(--text-dark);
+                background-color: transparent;
+            }
+
+            .sign__up:hover {
+                color: var(--primary-color);
+            }
+
+            .sign__in {
+                color: var(--white);
+                background-color: var(--primary-color);
+            }
+
+            .sign__in:hover {
+                background-color: var(--primary-color-dark);
+            }
+
+            .book-now__content {
+                flex-direction: row;
+                gap: 4rem;
+            }
+
+            .book-now__package {
+                flex: 1;
+            }
+
+            .book-now__order {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer__content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer__links {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .footer__social {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer__links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer__links a:hover {
+                transform: none;
+            }
+
+            .footer__social a {
+                font-size: 1.2rem;
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav__header">
+            <div class="nav__logo">
+                <a href="#">Global<span>Tretekker</span>.</a>
+            </div>
+            <div class="nav__menu__btn" id="menu-btn">
+                <span><i class="ri-menu-line"></i></span>
+            </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+            <li><a href="#destination-section">Destination</a></li>
+            <li><a href="#package-section">Package</a></li>
+            <li><a href="#blog-section">Blog</a></li>
+            <li><a href="#about-section">About Us</a></li>
+            <li><a href="#contact-section">Contact</a></li>
+        </ul>
+        <div class="nav__btns">
+            <button class="btn sign__up">Sign Up</button>
+            <button class="btn sign__in">Sign In</button>
+        </div>
+    </nav>
+
+    <section class="book-now">
+        <div class="book-now__container">
+            <div class="book-now__header">
+                <h2>Book Your <span>Adventure</span></h2>
+                <p>Complete your booking details and get ready for an unforgettable journey!</p>
+            </div>
+
+            <div class="book-now__content">
+                <div class="book-now__package">
+                    <div class="slider-buttons">
+                        <button id="prevBtn"><i class="ri-arrow-left-line"></i></button>
+                        <button id="nextBtn"><i class="ri-arrow-right-line"></i></button>
+                    </div>
+                    <img id="sliderImg" src="istockphoto-498867750-612x612.jpg" alt="Package Image 1">
+                    <h3>Romantic Paris Getaway</h3>
+                    <p>Experience the romance of Paris with our exclusive getaway package. Enjoy the city's iconic landmarks, charming cafes, and rich cultural experiences.</p>
+                    <div class="book-now__price">$899 <span>/person</span></div>
+                </div>
+
+                <div class="book-now__order">
+                    <h3>Order Details</h3>
+                    <div class="order-catalog">
+                        <div class="order-item">
+                            <span>Adults</span>
+                            <div class="quantity">
+                                <button class="decrement">-</button>
+                                <span class="quantity-value">1</span>
+                                <button class="increment">+</button>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <span>Children</span>
+                            <div class="quantity">
+                                <button class="decrement">-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="increment">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="book-now__btn">Proceed to Checkout</button>
+                </div>
+            </div>
+
+            <div class="reviews">
+                <h3>Customer Reviews</h3>
+                <div class="review">
+                    <div class="review-header">
+                        <span class="review-rating">★★★★☆</span>
+                        <span class="review-author">John Doe</span>
+                    </div>
+                    <p class="review-text">This was an amazing experience! Highly recommend it to everyone.</p>
+                </div>
+                <div class="review">
+                    <div class="review-header">
+                        <span class="review-rating">★★★★★</span>
+                        <span class="review-author">Jane Smith</span>
+                    </div>
+                    <p class="review-text">The tour was fantastic, and the guide was very knowledgeable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__content">
+                <div class="footer__logo">
+                    <a href="#">Global<span>Tretekker</span>.</a>
+                </div>
+                <div class="footer__links">
+                    <a href="#destination-section">Destination</a>
+                    <a href="#package-section">Package</a>
+                    <a href="#blog-section">Blog</a>
+                    <a href="#about-section">About Us</a>
+                    <a href="#contact-section">Contact</a>
+                </div>
+                <div class="footer__social">
+                    <a href="https://www.facebook.com/people/Hassan-Khan/100068737177235/"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-twitter-fill"></i></a>
+                    <a href="https://www.instagram.com/haccan_nt/"><i class="ri-instagram-fill"></i></a>
+                    <a href="https://www.linkedin.com/in/mhassannaeem/"><i class="ri-linkedin-fill"></i></a>
+                </div>
+            </div>
+            <div class="footer__copyright">
+                <p>&copy; 2024 GlobalTretekker. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const incrementButtons = document.querySelectorAll('.increment');
+            const decrementButtons = document.querySelectorAll('.decrement');
+
+            incrementButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const quantityValue = button.parentElement.querySelector('.quantity-value');
+                    let value = parseInt(quantityValue.textContent);
+                    value++;
+                    quantityValue.textContent = value;
+                });
+            });
+
+            decrementButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const quantityValue = button.parentElement.querySelector('.quantity-value');
+                    let value = parseInt(quantityValue.textContent);
+                    if (value > 0) {
+                        value--;
+                        quantityValue.textContent = value;
+                    }
+                });
+            });
+
+            const menuBtn = document.getElementById("menu-btn");
+            const navLinks = document.getElementById("nav-links");
+            const menuBtnIcon = menuBtn.querySelector("i");
+
+            menuBtn.addEventListener("click", () => {
+                navLinks.classList.toggle("open");
+                menuBtnIcon.classList.toggle("ri-close-line");
+                menuBtnIcon.classList.toggle("ri-menu-line");
+            });
+
+            navLinks.addEventListener("click", () => {
+                navLinks.classList.remove("open");
+                menuBtnIcon.classList.remove("ri-close-line");
+                menuBtnIcon.classList.add("ri-menu-line");
+            });
+
+            const images = [
+                "istockphoto-498867750-612x612.jpg",
+                "1_1100x700.jpg",
+                "france-cea-capa1.jpg"
+            ];
+            let currentIndex = 0;
+            const sliderImg = document.getElementById("sliderImg");
+            const prevBtn = document.getElementById("prevBtn");
+            const nextBtn = document.getElementById("nextBtn");
+
+            prevBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                sliderImg.src = images[currentIndex];
+            });
+
+            nextBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                sliderImg.src = images[currentIndex];
+            });
+        });
+    </script>
+</body>
+</html>
